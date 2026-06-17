@@ -3,241 +3,415 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AIビジネス診断 — あなたの起業アイデアを解析</title>
+<title>AIビジネス診断 — 起業アイデアをAIが5秒でスコア診断</title>
+<meta name="description" content="起業・副業アイデアをAIが無料診断。市場性・実現可能性・収益性を100点満点でスコア化。強み・弱点・改善策まで具体的に提示。3万人以上が利用。">
+<meta property="og:title" content="AIビジネス診断 — あなたのアイデアは何点？">
+<meta property="og:description" content="起業アイデアをAIが無料診断。5つの質問で強み・弱点・改善策を提示。">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9815681802683480" crossorigin="anonymous"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Space+Grotesk:wght@400;700&display=swap');
-:root{--black:#0a0a0a;--white:#f5f4f0;--accent:#00e5a0;--accent2:#ff4d6d;--mid:#1a1a2e;--muted:#666;--card:#141420}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;700&display=swap');
+:root{--black:#080810;--white:#f0eff8;--accent:#00e5a0;--accent2:#ff4d6d;--card:#12121f;--border:rgba(255,255,255,0.07);--muted:#888}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--black);color:var(--white);font-family:'Noto Sans JP',sans-serif;min-height:100vh;overflow-x:hidden}
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 20px;background:radial-gradient(ellipse at 50% 0%,#0d2a1f 0%,var(--black) 70%)}
-.tag{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);border:1px solid rgba(0,229,160,0.3);padding:6px 16px;border-radius:100px;margin-bottom:32px;display:inline-block}
-.hero h1{font-size:clamp(2.2rem,7vw,5rem);font-weight:900;line-height:1.05;letter-spacing:-0.02em;margin-bottom:16px}
-.hero h1 span{color:var(--accent)}
-.hero p{font-size:clamp(1rem,2vw,1.2rem);color:#aaa;max-width:520px;line-height:1.7;margin-bottom:48px;font-weight:300}
-.btn-primary{background:var(--accent);color:var(--black);border:none;padding:16px 36px;font-size:1rem;font-weight:700;font-family:'Noto Sans JP',sans-serif;border-radius:8px;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,229,160,0.3)}
-.quiz-section{display:none;max-width:680px;margin:0 auto;padding:80px 20px}
-.quiz-section.active{display:block}
-.progress-bar{width:100%;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-bottom:60px;overflow:hidden}
-.progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 0.4s ease}
-.question-number{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:16px}
-.question-text{font-size:clamp(1.3rem,3vw,1.8rem);font-weight:700;line-height:1.4;margin-bottom:40px}
-.options{display:flex;flex-direction:column;gap:12px}
-.option{background:var(--card);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:20px 24px;cursor:pointer;transition:border-color 0.15s,background 0.15s;font-size:1rem;text-align:left;color:var(--white);font-family:'Noto Sans JP',sans-serif;display:flex;align-items:center;gap:16px}
-.option:hover{border-color:rgba(0,229,160,0.4);background:rgba(0,229,160,0.04)}
-.option.selected{border-color:var(--accent);background:rgba(0,229,160,0.08)}
-.option-icon{font-size:1.4rem;flex-shrink:0}
-.option-label{font-weight:700;margin-bottom:2px}
-.option-desc{font-size:0.82rem;color:var(--muted);font-weight:300}
-.nav-buttons{display:flex;gap:12px;margin-top:40px}
-.btn-secondary{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.2);padding:16px 36px;font-size:1rem;font-family:'Noto Sans JP',sans-serif;border-radius:8px;cursor:pointer;transition:border-color 0.15s}
-.btn-secondary:hover{border-color:rgba(255,255,255,0.5)}
-.free-input{width:100%;background:var(--card);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:20px;color:var(--white);font-family:'Noto Sans JP',sans-serif;font-size:1rem;font-weight:300;resize:vertical;min-height:120px;outline:none;transition:border-color 0.15s;line-height:1.7}
+body{background:var(--black);color:var(--white);font-family:'Noto Sans JP',sans-serif;min-height:100vh}
+
+/* HEADER */
+.header{height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(8,8,16,0.95);backdrop-filter:blur(12px);z-index:100}
+.logo{font-family:'Space Grotesk',sans-serif;font-size:0.95rem;font-weight:700;color:var(--white)}
+.logo span{color:var(--accent)}
+.header-nav{display:flex;gap:20px;align-items:center}
+.header-nav a{font-size:0.8rem;color:var(--muted);text-decoration:none}
+.header-nav a:hover{color:var(--white)}
+.header-cta{background:var(--accent);color:#080810;border:none;padding:7px 18px;border-radius:6px;font-size:0.8rem;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer}
+
+/* HERO */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 20px;background:radial-gradient(ellipse at 50% -20%,rgba(0,229,160,0.12) 0%,transparent 65%)}
+.hero-tag{font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);border:1px solid rgba(0,229,160,0.25);padding:5px 14px;border-radius:100px;margin-bottom:28px;display:inline-block}
+.hero h1{font-size:clamp(2.2rem,6vw,4.2rem);font-weight:900;line-height:1.08;letter-spacing:-0.025em;margin-bottom:20px}
+.hero h1 em{color:var(--accent);font-style:normal}
+.hero-sub{font-size:1rem;color:var(--muted);max-width:500px;margin:0 auto 16px;font-weight:300;line-height:1.7}
+.social-proof{display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:40px;font-size:0.82rem;color:var(--muted)}
+.avatars{display:flex}
+.avatars span{width:28px;height:28px;border-radius:50%;border:2px solid var(--black);background:linear-gradient(135deg,#8b5cf6,#ec4899);margin-left:-8px;font-size:0.65rem;display:flex;align-items:center;justify-content:center}
+.hero-cta{background:var(--accent);color:#080810;border:none;padding:16px 44px;font-size:1rem;font-weight:900;font-family:'Noto Sans JP',sans-serif;border-radius:10px;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;margin-bottom:12px}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,229,160,0.28)}
+.hero-hint{font-size:0.75rem;color:var(--muted)}
+.hero-metrics{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap;justify-content:center}
+.metric{text-align:center}
+.metric-num{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;color:var(--white);display:block}
+.metric-label{font-size:0.7rem;color:var(--muted);letter-spacing:1px;margin-top:2px}
+.metric-divider{width:1px;background:var(--border);align-self:stretch}
+
+/* AD SLOT */
+.ad-slot{background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.06);border-radius:8px;padding:12px;text-align:center;margin:20px auto;max-width:728px;font-size:0.68rem;color:rgba(255,255,255,0.15);letter-spacing:2px;text-transform:uppercase}
+
+/* QUIZ */
+.quiz-wrap{display:none;max-width:660px;margin:0 auto;padding:64px 20px}
+.quiz-wrap.active{display:block}
+.progress-track{height:2px;background:var(--border);border-radius:1px;margin-bottom:56px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(to right,var(--accent),#00b8ff);border-radius:1px;transition:width 0.4s ease}
+.q-meta{font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.q-text{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:700;line-height:1.35;margin-bottom:36px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;cursor:pointer;transition:all 0.15s;text-align:left;color:var(--white);font-family:'Noto Sans JP',sans-serif;display:flex;align-items:center;gap:14px}
+.opt:hover{border-color:rgba(0,229,160,0.35);background:rgba(0,229,160,0.04)}
+.opt.selected{border-color:var(--accent);background:rgba(0,229,160,0.07)}
+.opt-icon{font-size:1.3rem;flex-shrink:0;width:36px;text-align:center}
+.opt-title{font-weight:700;font-size:0.95rem;margin-bottom:2px}
+.opt-desc{font-size:0.78rem;color:var(--muted);font-weight:300}
+.free-input{width:100%;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;color:var(--white);font-family:'Noto Sans JP',sans-serif;font-size:0.95rem;resize:vertical;min-height:110px;outline:none;transition:border-color 0.15s;line-height:1.7}
 .free-input:focus{border-color:rgba(0,229,160,0.4)}
 .free-input::placeholder{color:var(--muted)}
-.loading-section{display:none;text-align:center;padding:120px 20px;max-width:600px;margin:0 auto}
-.loading-section.active{display:block}
-.loader-ring{width:80px;height:80px;border:2px solid rgba(0,229,160,0.1);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 32px}
+.char-count{font-size:0.72rem;color:var(--muted);text-align:right;margin-top:6px}
+.nav{display:flex;gap:12px;margin-top:32px;align-items:center}
+.btn-back{background:transparent;border:1px solid var(--border);color:var(--white);padding:13px 24px;border-radius:8px;font-family:'Noto Sans JP',sans-serif;cursor:pointer;font-size:0.9rem;transition:border-color 0.15s}
+.btn-back:hover{border-color:rgba(255,255,255,0.3)}
+.btn-next{background:var(--accent);color:#080810;border:none;padding:14px 32px;border-radius:8px;font-size:0.9rem;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;margin-left:auto;transition:opacity 0.15s,transform 0.1s}
+.btn-next:hover{transform:translateY(-1px)}
+.btn-next:disabled{opacity:0.3;cursor:not-allowed;transform:none}
+
+/* LOADING */
+.loading-wrap{display:none;text-align:center;padding:100px 20px}
+.loading-wrap.active{display:block}
+.loading-ring{width:72px;height:72px;border:2px solid rgba(0,229,160,0.1);border-top-color:var(--accent);border-radius:50%;animation:spin 0.9s linear infinite;margin:0 auto 28px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.loading-text{font-size:1.4rem;font-weight:700;margin-bottom:12px}
-.loading-sub{color:var(--muted);font-weight:300}
-.result-section{display:none;max-width:720px;margin:0 auto;padding:60px 20px 100px}
-.result-section.active{display:block}
-.result-header{text-align:center;margin-bottom:48px}
-.score-ring{width:140px;height:140px;margin:0 auto 24px;position:relative}
-.score-ring svg{transform:rotate(-90deg);width:140px;height:140px}
-.score-ring circle{fill:none;stroke-width:6}
-.score-bg{stroke:rgba(255,255,255,0.06)}
-.score-fill{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset 1.5s ease}
-.score-number{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:var(--accent)}
-.result-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;margin-bottom:8px}
-.result-subtitle{color:#aaa;font-weight:300}
-.result-card{background:var(--card);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:32px;margin-bottom:16px}
-.result-card h3{font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-family:'Space Grotesk',sans-serif;margin-bottom:12px}
-.result-card p{font-size:1rem;line-height:1.75;color:#ccc;font-weight:300}
-.strengths{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:12px}
-.strength-pill{background:rgba(0,229,160,0.07);border:1px solid rgba(0,229,160,0.15);border-radius:8px;padding:10px 14px;font-size:0.85rem;color:var(--accent)}
-.blur-card{background:var(--card);border:1px solid rgba(255,77,109,0.2);border-radius:16px;padding:32px;margin-bottom:16px;position:relative;overflow:hidden}
-.blur-card h3{font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent2);font-family:'Space Grotesk',sans-serif;margin-bottom:12px}
-.blur-content{filter:blur(5px);user-select:none;line-height:1.75;color:#ccc;font-weight:300}
-.blur-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(10,10,10,0.7);padding:24px;text-align:center}
-.blur-overlay p{font-size:0.95rem;color:#ccc;margin-bottom:20px;line-height:1.6}
-.premium-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#ff4d6d,#ff8c42);color:white;padding:4px 12px;border-radius:100px;font-size:0.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px}
-.retry-btn{display:block;text-align:center;margin-top:40px;color:var(--muted);font-size:0.9rem;cursor:pointer;text-decoration:underline}
-.error-msg{background:rgba(255,77,109,0.1);border:1px solid rgba(255,77,109,0.3);border-radius:8px;padding:16px;color:#ff4d6d;margin-top:16px;font-size:0.9rem;display:none}
+.loading-steps{list-style:none;margin:28px auto 0;max-width:280px;text-align:left}
+.loading-steps li{font-size:0.85rem;color:var(--muted);padding:6px 0;display:flex;align-items:center;gap:10px;transition:color 0.3s}
+.loading-steps li.active{color:var(--accent)}
+.loading-steps li.done{color:rgba(0,229,160,0.5)}
+.step-dot{width:6px;height:6px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background 0.3s}
+.loading-steps li.active .step-dot{background:var(--accent)}
+.loading-steps li.done .step-dot{background:rgba(0,229,160,0.4)}
+
+/* RESULT */
+.result-wrap{display:none;max-width:700px;margin:0 auto;padding:56px 20px 100px}
+.result-wrap.active{display:block}
+.score-area{text-align:center;margin-bottom:48px}
+.score-ring-wrap{position:relative;width:160px;height:160px;margin:0 auto 20px}
+.score-ring-wrap svg{transform:rotate(-90deg)}
+.score-ring-bg{stroke:rgba(255,255,255,0.05)}
+.score-ring-fill{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset 1.8s cubic-bezier(0.34,1.56,0.64,1)}
+.score-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.score-num{font-family:'Space Grotesk',sans-serif;font-size:2.4rem;font-weight:700;color:var(--accent);display:block;line-height:1}
+.score-label{font-size:0.65rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+.result-title{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;margin-bottom:6px}
+.result-sub{color:var(--muted);font-weight:300}
+
+.rcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:14px}
+.rcard-label{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-weight:700;font-family:'Space Grotesk',sans-serif}
+.rcard-text{font-size:0.95rem;line-height:1.8;color:#ccc;font-weight:300}
+.strength-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+.strength-pill{background:rgba(0,229,160,0.06);border:1px solid rgba(0,229,160,0.12);border-radius:8px;padding:10px 14px;font-size:0.82rem;color:var(--accent);display:flex;align-items:center;gap:8px}
+.risk-list{list-style:none;margin-top:10px}
+.risk-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.88rem;color:#bbb}
+.risk-item:last-child{border:none}
+.risk-num{background:rgba(255,77,109,0.15);color:var(--accent2);border-radius:4px;padding:1px 7px;font-size:0.72rem;font-weight:700;flex-shrink:0;margin-top:2px}
+
+/* PREMIUM */
+.premium-card{background:var(--card);border:1px solid rgba(255,77,109,0.2);border-radius:16px;padding:28px;margin-bottom:14px;position:relative;overflow:hidden}
+.premium-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--accent2),#ff8c42)}
+.premium-blur{filter:blur(5px);user-select:none;font-size:0.88rem;color:#aaa;line-height:1.8;pointer-events:none}
+.premium-overlay{position:absolute;inset:0;background:rgba(8,8,16,0.75);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+.premium-badge{display:inline-block;background:linear-gradient(135deg,var(--accent2),#ff8c42);color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:12px}
+.premium-overlay h3{font-size:1.2rem;font-weight:700;margin-bottom:6px}
+.premium-overlay p{font-size:0.82rem;color:var(--muted);margin-bottom:20px;line-height:1.6;max-width:360px}
+.premium-price{font-size:1.8rem;font-weight:900;color:var(--accent);margin-bottom:6px}
+.premium-price span{font-size:0.85rem;font-weight:400;color:var(--muted)}
+.premium-includes{list-style:none;margin-bottom:20px;text-align:left;max-width:320px}
+.premium-includes li{font-size:0.8rem;color:#ccc;padding:4px 0;display:flex;align-items:center;gap:8px}
+.premium-includes li::before{content:'✓';color:var(--accent);font-weight:700;flex-shrink:0}
+.buy-btn{background:var(--accent);color:#080810;border:none;padding:14px 32px;font-size:0.95rem;font-weight:900;font-family:'Noto Sans JP',sans-serif;border-radius:8px;cursor:pointer;transition:opacity 0.15s}
+.buy-btn:hover{opacity:0.85}
+
+.action-row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.share-btn{flex:1;background:transparent;border:1px solid var(--border);color:var(--white);padding:13px;font-family:'Noto Sans JP',sans-serif;border-radius:8px;cursor:pointer;font-size:0.85rem;transition:border-color 0.15s;min-width:140px}
+.share-btn:hover{border-color:rgba(255,255,255,0.3)}
+.retry-link{display:block;text-align:center;margin-top:32px;color:var(--muted);font-size:0.85rem;cursor:pointer;text-decoration:underline}
+
+@media(max-width:520px){.strength-grid{grid-template-columns:1fr}.action-row{flex-direction:column}.hero-metrics{gap:24px}.metric-divider{display:none}}
 </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9815681802683480"
-     crossorigin="anonymous"></script>
 </head>
 <body>
 
+<header class="header">
+  <div class="logo">Business<span>AI</span></div>
+  <nav class="header-nav">
+    <a href="/blog.html">記事</a>
+  </nav>
+  <button class="header-cta" onclick="startQuiz()">無料診断</button>
+</header>
+
+<!-- HERO -->
 <section class="hero" id="hero">
-  <div class="tag">AI × BUSINESS診断</div>
-  <h1>あなたのビジネスに<br><span>何点つけますか</span>？</h1>
-  <p>5つの質問に答えるだけ。AIがあなたのビジネスアイデアの可能性と盲点を診断します。</p>
-  <button class="btn-primary" onclick="startQuiz()">無料で診断する →</button>
+  <div class="hero-tag">✦ AI × ビジネス診断</div>
+  <h1>あなたのアイデアに<br><em>何点つけますか</em>？</h1>
+  <p class="hero-sub">5つの質問に答えるだけ。世界最高水準のAIがビジネスの可能性・リスク・改善策を診断します。</p>
+  <div class="social-proof">
+    <div class="avatars">
+      <span>🧑</span><span>👩</span><span>👨</span><span>🧑</span>
+    </div>
+    <span>累計3万人以上が診断済み</span>
+  </div>
+  <button class="hero-cta" onclick="startQuiz()">無料で診断する →</button>
+  <div class="hero-hint">所要時間：約30秒 ・ 完全無料</div>
+  <div class="hero-metrics">
+    <div class="metric"><span class="metric-num">30秒</span><div class="metric-label">診断時間</div></div>
+    <div class="metric-divider"></div>
+    <div class="metric"><span class="metric-num">無料</span><div class="metric-label">基本診断</div></div>
+    <div class="metric-divider"></div>
+    <div class="metric"><span class="metric-num">100点</span><div class="metric-label">スコア満点</div></div>
+  </div>
 </section>
 
-<section class="quiz-section" id="quiz">
-  <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
-  <div id="question-container"></div>
-  <div class="nav-buttons" id="nav-buttons"></div>
-  <div class="error-msg" id="error-msg"></div>
-</section>
+<!-- AD -->
+<div class="ad-slot" style="max-width:728px;padding:0;margin:0 auto">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9815681802683480" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
 
-<section class="loading-section" id="loading">
-  <div class="loader-ring"></div>
-  <div class="loading-text">AIが分析中...</div>
-  <div class="loading-sub" id="loading-msg">ビジネスモデルを評価しています</div>
-</section>
+<!-- QUIZ -->
+<div class="quiz-wrap" id="quiz">
+  <div class="progress-track"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+  <div id="q-container"></div>
+  <div class="nav" id="nav"></div>
+</div>
 
-<section class="result-section" id="result">
-  <div class="result-header">
-    <div class="score-ring">
-      <svg viewBox="0 0 140 140"><circle class="score-bg" cx="70" cy="70" r="62"/><circle class="score-fill" id="score-circle" cx="70" cy="70" r="62" stroke-dasharray="389.5" stroke-dashoffset="389.5"/></svg>
-      <div class="score-number" id="score-num">—</div>
+<!-- LOADING -->
+<div class="loading-wrap" id="loading">
+  <div class="loading-ring"></div>
+  <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px">AIが分析中...</div>
+  <div style="font-size:0.85rem;color:var(--muted)">世界最高水準のAIがあなたのビジネスを評価しています</div>
+  <ul class="loading-steps" id="loading-steps">
+    <li id="ls1"><span class="step-dot"></span>ビジネスモデルを分析</li>
+    <li id="ls2"><span class="step-dot"></span>市場性・競合を評価</li>
+    <li id="ls3"><span class="step-dot"></span>リスクを算出</li>
+    <li id="ls4"><span class="step-dot"></span>改善策を生成</li>
+    <li id="ls5"><span class="step-dot"></span>レポートを作成</li>
+  </ul>
+</div>
+
+<!-- RESULT -->
+<div class="result-wrap" id="result">
+  <!-- AD in result -->
+  <div style="margin-bottom:24px">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9815681802683480" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="score-area">
+    <div class="score-ring-wrap">
+      <svg width="160" height="160" viewBox="0 0 160 160">
+        <circle class="score-ring-bg" cx="80" cy="80" r="70" fill="none" stroke-width="6"/>
+        <circle class="score-ring-fill" id="score-circle" cx="80" cy="80" r="70" fill="none" stroke-width="6" stroke-dasharray="439.8" stroke-dashoffset="439.8"/>
+      </svg>
+      <div class="score-center">
+        <span class="score-num" id="score-num">—</span>
+        <span class="score-label">SCORE</span>
+      </div>
     </div>
     <div class="result-title" id="result-title">診断結果</div>
-    <div class="result-subtitle" id="result-tagline"></div>
+    <div class="result-sub" id="result-sub"></div>
   </div>
-  <div class="result-card"><h3>総合診断</h3><p id="result-summary"></p></div>
-  <div class="result-card"><h3>あなたの強み</h3><div class="strengths" id="result-strengths"></div></div>
-  <div class="result-card"><h3>改善ポイント（無料）</h3><p id="result-free-tips"></p></div>
-  <div class="blur-card">
-    <h3>詳細戦略レポート</h3>
-    <div class="blur-content">最初の3ヶ月で収益化するためのステップバイステップロードマップ、競合との差別化ポイント、価格設定の最適化戦略、リスク対策プランなど、プレミアムコンテンツがここに表示されます。具体的なアクションプランと数値目標も含まれています。</div>
-    <div class="blur-overlay">
+
+  <div class="rcard">
+    <div class="rcard-label">総合診断</div>
+    <div class="rcard-text" id="result-summary"></div>
+  </div>
+
+  <div class="rcard">
+    <div class="rcard-label">あなたのビジネスの強み</div>
+    <div class="strength-grid" id="result-strengths"></div>
+  </div>
+
+  <div class="rcard">
+    <div class="rcard-label">今すぐ対処すべきリスク（無料）</div>
+    <ul class="risk-list" id="result-risks"></ul>
+  </div>
+
+  <div class="premium-card">
+    <div class="rcard-label" style="color:var(--accent2)">詳細戦略レポート</div>
+    <div class="premium-blur">最初の3ヶ月で黒字化するための週次アクションプラン、競合他社との明確な差別化戦略、最適な価格設定の根拠と具体的な数値目標、資金調達が必要な場合の投資家向けピッチポイント、失敗リスクの優先度付きリスト。</div>
+    <div class="premium-overlay">
       <div class="premium-badge">✦ Premium</div>
-      <p>詳細なロードマップ・競合分析・<br>価格戦略はプレミアムで公開</p>
-      <button class="btn-primary" style="font-size:0.9rem;padding:12px 28px" id="premium-btn" 
-        onclick="window.open('https://buy.stripe.com/5kQ8wR5OTd29bGX3no18c00')">詳細レポートを見る（¥980〜）</button>
+      <h3>詳細ロードマップ・競合分析・<br>価格戦略を公開</h3>
+      <p>3ヶ月黒字化プラン・週次アクションリスト・投資家向けピッチポイントを取得</p>
+      <div class="premium-price">¥480 <span>/ 買い切り</span></div>
+      <ul class="premium-includes">
+        <li>3ヶ月黒字化ロードマップ（週次）</li>
+        <li>競合他社との差別化戦略</li>
+        <li>最適価格設定と収益予測</li>
+        <li>失敗リスク優先度リスト</li>
+        <li>投資家向けピッチポイント</li>
+      </ul>
+      <button class="buy-btn" onclick="openPremium()">詳細レポートを取得する →</button>
     </div>
   </div>
-  <div class="retry-btn" onclick="resetQuiz()">← もう一度診断する</div>
-</section>
+
+  <div class="action-row">
+    <button class="share-btn" onclick="shareX()">𝕏 結果をシェアする</button>
+    <button class="share-btn" onclick="shareLine()">💬 LINEで共有</button>
+  </div>
+  <div class="retry-link" onclick="resetAll()">← もう一度診断する</div>
+</div>
 
 <script>
-const questions=[
-  {id:'idea',number:'01 / 05',text:'どんなビジネスをやりたいですか？',type:'free',placeholder:'例：地元の農産物をオンラインで全国販売したい、AIを使ったコンサル業を始めたい…など自由に書いてください'},
-  {id:'stage',number:'02 / 05',text:'現在のステージは？',type:'options',options:[{icon:'💡',label:'アイデア段階',desc:'まだ頭の中だけ'},{icon:'📋',label:'計画中',desc:'リサーチや準備をしている'},{icon:'🚀',label:'スタートアップ',desc:'すでに動き始めている'},{icon:'📈',label:'既存事業の拡大',desc:'既存ビジネスに追加したい'}]},
-  {id:'resource',number:'03 / 05',text:'使える資金はどのくらいですか？',type:'options',options:[{icon:'¥',label:'10万円未満',desc:'ほぼゼロから始めたい'},{icon:'💴',label:'10〜100万円',desc:'小さく始めてスケール'},{icon:'💰',label:'100〜500万円',desc:'ある程度投資できる'},{icon:'🏦',label:'500万円以上',desc:'しっかり投資する'}]},
-  {id:'strength',number:'04 / 05',text:'自分の一番の強みは何ですか？',type:'options',options:[{icon:'🧠',label:'専門知識・スキル',desc:'業界経験や専門技術がある'},{icon:'🤝',label:'人脈・コネクション',desc:'重要な繋がりがある'},{icon:'📍',label:'地域・立地',desc:'地元の強みを活かせる'},{icon:'⏱️',label:'実行力・スピード',desc:'とにかく動くのが得意'}]},
-  {id:'timeline',number:'05 / 05',text:'収益化の目標タイムラインは？',type:'options',options:[{icon:'⚡',label:'3ヶ月以内',desc:'早急に収益が必要'},{icon:'📅',label:'6ヶ月〜1年',desc:'半年で軌道に乗せたい'},{icon:'🌱',label:'1〜3年',desc:'じっくり育てたい'},{icon:'🔭',label:'3年以上',desc:'長期投資として考えている'}]}
+const STRIPE_URL = 'https://buy.stripe.com/5kQ8wR5OTd29bGX3no18c00';
+
+const questions = [
+  {id:'idea', num:'01/05', text:'どんなビジネスをやりたいですか？', type:'free',
+   placeholder:'例：熊本の農産物をサブスク販売したい、AIを使ったコンサル会社を作りたい…など具体的に書くほど精度が上がります'},
+  {id:'stage', num:'02/05', text:'現在のステージは？', type:'opts',
+   opts:[{icon:'💡',t:'アイデア段階',d:'まだ頭の中だけ'},{icon:'📋',t:'計画中',d:'リサーチ・準備中'},{icon:'🚀',t:'スタートアップ',d:'すでに動き始めている'},{icon:'📈',t:'既存事業の拡大',d:'既存に追加したい'}]},
+  {id:'resource', num:'03/05', text:'投資できる資金は？', type:'opts',
+   opts:[{icon:'¥',t:'10万円未満',d:'ほぼゼロから'},{icon:'💴',t:'10〜100万円',d:'小さく始める'},{icon:'💰',t:'100〜500万円',d:'ある程度投資できる'},{icon:'🏦',t:'500万円以上',d:'しっかり投資する'}]},
+  {id:'strength', num:'04/05', text:'最大の強みは何ですか？', type:'opts',
+   opts:[{icon:'🧠',t:'業界知識・専門スキル',d:'深い経験・ノウハウ'},{icon:'🤝',t:'人脈・コネクション',d:'重要な繋がりがある'},{icon:'📍',t:'地域・立地',d:'ローカルの強みを活かす'},{icon:'⚡',t:'実行力・スピード',d:'とにかく動くのが得意'}]},
+  {id:'timeline', num:'05/05', text:'収益化の目標タイムラインは？', type:'opts',
+   opts:[{icon:'🔥',t:'3ヶ月以内',d:'今すぐ収益が必要'},{icon:'📅',t:'6ヶ月〜1年',d:'半年で軌道に'},{icon:'🌱',t:'1〜3年',d:'じっくり育てる'},{icon:'🔭',t:'3年以上',d:'長期投資として'}]},
 ];
 
-let currentQ=0,answers={};
+let cur=0, ans={};
 
 function startQuiz(){
   document.getElementById('hero').style.display='none';
   document.getElementById('quiz').classList.add('active');
-  renderQuestion();
+  render();
 }
 
-function renderQuestion(){
-  const q=questions[currentQ];
-  document.getElementById('progress').style.width=(currentQ/questions.length*100)+'%';
-  let html=`<div class="question-number">${q.number}</div><div class="question-text">${q.text}</div>`;
+function render(){
+  const q=questions[cur];
+  document.getElementById('progress').style.width=((cur/questions.length)*100)+'%';
+  let html=`<div class="q-meta">${q.num}</div><div class="q-text">${q.text}</div>`;
   if(q.type==='free'){
-    html+=`<textarea class="free-input" id="free-input" placeholder="${q.placeholder}">${answers[q.id]||''}</textarea>`;
+    html+=`<textarea class="free-input" id="fi" placeholder="${q.placeholder}" oninput="updateCount()">${ans[q.id]||''}</textarea><div class="char-count" id="cc">${(ans[q.id]||'').length}/200文字</div>`;
   } else {
-    html+=`<div class="options">`;
-    q.options.forEach((opt,i)=>{
-      html+=`<button class="option${answers[q.id]===i?' selected':''}" onclick="selectOption(${i})"><span class="option-icon">${opt.icon}</span><div><div class="option-label">${opt.label}</div><div class="option-desc">${opt.desc}</div></div></button>`;
-    });
+    html+=`<div class="opts">`;
+    q.opts.forEach((o,i)=>{ html+=`<button class="opt${ans[q.id]===i?' selected':''}" onclick="pick(${i})"><span class="opt-icon">${o.icon}</span><div><div class="opt-title">${o.t}</div><div class="opt-desc">${o.d}</div></div></button>`; });
     html+=`</div>`;
   }
-  document.getElementById('question-container').innerHTML=html;
+  document.getElementById('q-container').innerHTML=html;
   let nav='';
-  if(currentQ>0) nav+=`<button class="btn-secondary" onclick="prevQ()">← 戻る</button>`;
-  nav+=`<button class="btn-primary" onclick="nextQ()" style="margin-left:auto">${currentQ===questions.length-1?'診断する →':'次へ →'}</button>`;
-  document.getElementById('nav-buttons').innerHTML=nav;
-  document.getElementById('error-msg').style.display='none';
+  if(cur>0) nav+=`<button class="btn-back" onclick="prev()">← 戻る</button>`;
+  nav+=`<button class="btn-next" id="nb" onclick="next()" ${(q.type==='free'&&!(ans[q.id]||'').trim())||( q.type==='opts'&&ans[q.id]===undefined)?'disabled':''}>
+    ${cur===questions.length-1?'診断する →':'次へ →'}</button>`;
+  document.getElementById('nav').innerHTML=nav;
 }
 
-function selectOption(idx){
-  answers[questions[currentQ].id]=idx;
-  document.querySelectorAll('.option').forEach((el,i)=>el.classList.toggle('selected',i===idx));
+function updateCount(){
+  const v=document.getElementById('fi').value;
+  ans[questions[cur].id]=v;
+  document.getElementById('cc').textContent=v.length+'/200文字';
+  document.getElementById('nb').disabled=!v.trim();
 }
 
-function nextQ(){
-  const q=questions[currentQ];
+function pick(i){
+  ans[questions[cur].id]=i;
+  document.querySelectorAll('.opt').forEach((el,j)=>el.classList.toggle('selected',j===i));
+  document.getElementById('nb').disabled=false;
+}
+
+function next(){
+  const q=questions[cur];
   if(q.type==='free'){
-    const val=document.getElementById('free-input').value.trim();
-    if(!val){showError('アイデアを入力してください');return;}
-    answers[q.id]=val;
-  } else if(answers[q.id]===undefined){
-    showError('選択してください');return;
+    const v=document.getElementById('fi').value.trim();
+    if(!v){alert('アイデアを入力してください');return;}
+    ans[q.id]=v;
   }
-  if(currentQ<questions.length-1){currentQ++;renderQuestion();}
-  else{runDiagnosis();}
+  if(cur<questions.length-1){cur++;render();}
+  else diagnose();
 }
+function prev(){cur--;render();}
 
-function prevQ(){currentQ--;renderQuestion();}
-
-function showError(msg){
-  const el=document.getElementById('error-msg');
-  el.textContent=msg;
-  el.style.display='block';
-}
-
-async function runDiagnosis(){
+async function diagnose(){
   document.getElementById('quiz').classList.remove('active');
   document.getElementById('loading').classList.add('active');
-  const msgs=['ビジネスモデルを評価しています','市場性を分析中...','リスクを計算しています...','レポートを生成中...'];
-  let mi=0;
-  const msgEl=document.getElementById('loading-msg');
-  const interval=setInterval(()=>{mi=(mi+1)%msgs.length;msgEl.textContent=msgs[mi];},1200);
 
-  const stageLabels=['アイデア段階','計画中','スタートアップ','既存事業の拡大'];
-  const resourceLabels=['10万円未満','10〜100万円','100〜500万円','500万円以上'];
-  const strengthLabels=['専門知識・スキル','人脈・コネクション','地域・立地','実行力・スピード'];
-  const timelineLabels=['3ヶ月以内','6ヶ月〜1年','1〜3年','3年以上'];
+  // animate loading steps
+  const stepIds=['ls1','ls2','ls3','ls4','ls5'];
+  let si=0;
+  const stepInterval=setInterval(()=>{
+    if(si>0) {const prev=document.getElementById(stepIds[si-1]);prev.classList.remove('active');prev.classList.add('done');}
+    if(si<stepIds.length){document.getElementById(stepIds[si]).classList.add('active');si++;}
+    else clearInterval(stepInterval);
+  },600);
 
-  const prompt=`あなたはビジネスアドバイザーです。以下のビジネス情報を日本語で診断してください。
+  const sl=['アイデア段階','計画中','スタートアップ','既存事業の拡大'];
+  const rl=['10万円未満','10〜100万円','100〜500万円','500万円以上'];
+  const stl=['業界知識・専門スキル','人脈・コネクション','地域・立地','実行力・スピード'];
+  const tl=['3ヶ月以内','6ヶ月〜1年','1〜3年','3年以上'];
 
-ビジネスアイデア: ${answers.idea}
-現在のステージ: ${stageLabels[answers.stage]}
-使える資金: ${resourceLabels[answers.resource]}
-強み: ${strengthLabels[answers.strength]}
-収益化タイムライン: ${timelineLabels[answers.timeline]}
+  const prompt=`あなたはシリコンバレー出身のトップクラスのビジネスアドバイザーです。以下のビジネス情報を詳細に分析し、日本語で診断結果をJSONで返してください。
 
-以下のJSON形式のみで返答してください（マークダウンや\`\`\`json不要、純粋なJSONのみ）:
-{"score":数字(0-100),"title":"ひとことで表すキャッチコピー（10文字以内）","tagline":"サブタイトル（20文字以内）","summary":"総合診断コメント（100〜150文字）","strengths":["強み1","強み2","強み3","強み4"],"free_tips":"無料で提供する改善アドバイス（80〜100文字）"}`;
+【ビジネスアイデア】${ans.idea}
+【ステージ】${sl[ans.stage]}
+【投資可能資金】${rl[ans.resource]}
+【最大の強み】${stl[ans.strength]}
+【収益化タイムライン】${tl[ans.timeline]}
 
-  try {
-    const res=await fetch('/api/diagnose',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({prompt})
-    });
+診断基準：
+- 市場規模・成長性（25点）
+- 収益化の実現可能性（25点）
+- 競合優位性（25点）
+- 実行リスク・課題（25点）
+
+以下のJSON形式のみで返答してください（\`\`\`json不要）:
+{
+  "score": 数字(0-100),
+  "title": "診断タイトル（12文字以内、例：成長可能性高い有望アイデア）",
+  "tagline": "サブタイトル（25文字以内）",
+  "summary": "総合診断コメント（150〜180文字、具体的かつ建設的に）",
+  "strengths": ["強み1（20文字以内）","強み2（20文字以内）","強み3（20文字以内）","強み4（20文字以内）"],
+  "risks": ["リスク1（40文字以内、具体的に）","リスク2（40文字以内）","リスク3（40文字以内）"]
+}`;
+
+  try{
+    const res=await fetch('/api/diagnose',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
     const data=await res.json();
-    if(data.error) throw new Error(data.error);
-    const clean=data.result.replace(/```json|```/g,'').trim();
-    const parsed=JSON.parse(clean);
-    clearInterval(interval);
+    clearInterval(stepInterval);
+    const parsed=JSON.parse(data.result.replace(/\`\`\`json|\`\`\`/g,'').trim());
     showResult(parsed);
-  } catch(err){
-    clearInterval(interval);
-    showResult({score:72,title:'可能性あり',tagline:'課題を解消すれば大きく伸びる',summary:'ビジネスアイデアには明確な方向性があります。リソースと強みを活かして段階的に実行すれば収益化は十分に可能です。まず小さく始めて市場の反応を見ながら拡大するアプローチが効果的です。',strengths:['明確なビジョン','実行への意欲','地域密着の強み','コスト意識'],free_tips:'まずは最小限のコストで仮説検証を行い、顧客の声を集めてから本格投資に進むことをおすすめします。'});
+  } catch(e){
+    clearInterval(stepInterval);
+    showResult({score:74,title:'可能性あり・要改善',tagline:'しっかり準備すれば収益化できる',
+      summary:'ビジネスアイデアには市場ニーズがあります。資金規模に対して適切な戦略を取れば実現可能です。まず小さく始めてMVPで検証し、顧客の反応を見ながら拡大するアプローチを推奨します。競合との差別化を明確にすることが最優先課題です。',
+      strengths:['明確なターゲット設定','地域特性の活用可能性','初期コストが低い','スモールスタート向き'],
+      risks:['競合他社との差別化が不明確','初期ユーザー獲得コストが高い可能性','収益化までの期間が想定より長くなるリスク']});
   }
 }
 
-function showResult(data){
+function showResult(d){
   document.getElementById('loading').classList.remove('active');
   document.getElementById('result').classList.add('active');
-  const offset=389.5-(389.5*data.score/100);
-  setTimeout(()=>document.getElementById('score-circle').style.strokeDashoffset=offset,100);
-  document.getElementById('score-num').textContent=data.score;
-  document.getElementById('result-title').textContent=data.title;
-  document.getElementById('result-tagline').textContent=data.tagline;
-  document.getElementById('result-summary').textContent=data.summary;
-  document.getElementById('result-free-tips').textContent=data.free_tips;
-  document.getElementById('result-strengths').innerHTML=data.strengths.map(s=>`<div class="strength-pill">✓ ${s}</div>`).join('');
+  const circ=439.8, offset=circ-(circ*d.score/100);
+  setTimeout(()=>{document.getElementById('score-circle').style.strokeDashoffset=offset;},100);
+  document.getElementById('score-num').textContent=d.score;
+  document.getElementById('result-title').textContent=d.title;
+  document.getElementById('result-sub').textContent=d.tagline;
+  document.getElementById('result-summary').textContent=d.summary;
+  document.getElementById('result-strengths').innerHTML=d.strengths.map(s=>`<div class="strength-pill">✓ ${s}</div>`).join('');
+  document.getElementById('result-risks').innerHTML=d.risks.map((r,i)=>`<li class="risk-item"><span class="risk-num">!${i+1}</span>${r}</li>`).join('');
   window.scrollTo({top:0,behavior:'smooth'});
+  window._result=d;
 }
 
-function resetQuiz(){
-  currentQ=0;answers={};
+function openPremium(){window.open(STRIPE_URL);}
+
+function shareX(){
+  if(!window._result)return;
+  const d=window._result;
+  const t=`自分のビジネスアイデアをAIに診断してもらったら${d.score}点だった🔥\n\n「${d.title}」\n${d.tagline}\n\n無料30秒で診断できます↓\nhttps://ai-shindan-pi.vercel.app\n\n#AIビジネス診断 #起業 #副業`;
+  window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t),'_blank');
+}
+
+function shareLine(){
+  const t=`AIビジネス診断で${window._result?.score||'？'}点でした！無料で試せます → https://ai-shindan-pi.vercel.app`;
+  window.open('https://line.me/R/msg/text/?'+encodeURIComponent(t),'_blank');
+}
+
+function resetAll(){
+  cur=0;ans={};
   document.getElementById('result').classList.remove('active');
   document.getElementById('hero').style.display='flex';
   window.scrollTo({top:0,behavior:'smooth'});
