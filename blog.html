@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>起業アイデアの診断方法｜AIが5秒で評価してくれる無料ツール2026年版</title>
+<meta name="description" content="起業アイデアをAIが無料で診断。スコア・強み・改善点を5秒で表示。3,000人以上が利用した信頼のAIビジネス診断ツール。">
+<meta property="og:title" content="起業アイデアの診断方法｜AIが5秒で評価">
+<meta property="og:description" content="AIが起業アイデアを無料診断。強み・弱点・改善策を瞬時に提示。">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+:root { --ink:#1a1a1a; --paper:#fafaf8; --accent:#1a4fd6; --muted:#666; --border:#e5e3de; --card:#fff; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--paper); color:var(--ink); font-family:'Noto Sans JP',sans-serif; font-size:16px; line-height:1.8; }
+.site-header { border-bottom:1px solid var(--border); padding:0 24px; height:52px; display:flex; align-items:center; justify-content:space-between; background:#fff; position:sticky; top:0; z-index:10; }
+.logo { font-weight:700; font-size:1rem; color:var(--ink); text-decoration:none; }
+.header-cta { background:var(--accent); color:#fff; border:none; padding:8px 18px; border-radius:4px; font-size:0.8rem; font-weight:700; font-family:'Noto Sans JP',sans-serif; cursor:pointer; }
+.hero-article { background:linear-gradient(135deg,#1a4fd6 0%,#0d2a8a 100%); color:#fff; padding:60px 24px; text-align:center; }
+.hero-article .eyebrow { font-size:0.72rem; letter-spacing:3px; text-transform:uppercase; opacity:0.7; margin-bottom:16px; }
+.hero-article h1 { font-size:clamp(1.6rem,4vw,2.4rem); font-weight:900; line-height:1.3; margin-bottom:16px; }
+.hero-article .lead { font-size:1rem; opacity:0.85; max-width:560px; margin:0 auto; font-weight:300; }
+.container { max-width:720px; margin:0 auto; padding:48px 24px; }
+h2 { font-size:1.4rem; font-weight:700; margin:48px 0 16px; padding-left:12px; border-left:3px solid var(--accent); }
+h3 { font-size:1.1rem; font-weight:700; margin:32px 0 12px; }
+p { margin-bottom:16px; color:#333; }
+.toc { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:24px; margin-bottom:40px; }
+.toc-title { font-weight:700; margin-bottom:12px; font-size:0.9rem; }
+.toc ol { padding-left:20px; }
+.toc li { margin-bottom:6px; font-size:0.9rem; }
+.toc a { color:var(--accent); text-decoration:none; }
+.toc a:hover { text-decoration:underline; }
+.check-list { list-style:none; margin:16px 0; }
+.check-list li { padding:8px 0 8px 28px; position:relative; border-bottom:1px solid var(--border); font-size:0.95rem; }
+.check-list li::before { content:'✓'; position:absolute; left:0; color:var(--accent); font-weight:700; }
+.highlight-box { background:#e8eefb; border-left:3px solid var(--accent); border-radius:0 8px 8px 0; padding:20px 24px; margin:24px 0; }
+.highlight-box p { margin:0; color:#1a1a1a; }
+.cta-box { background:linear-gradient(135deg,#0d0d14,#1a1a2e); color:#fff; border-radius:16px; padding:40px 32px; text-align:center; margin:48px 0; }
+.cta-box h3 { font-size:1.4rem; margin-bottom:8px; color:#00e5a0; }
+.cta-box p { color:#aaa; margin-bottom:24px; font-weight:300; }
+.cta-btn { display:inline-block; background:#00e5a0; color:#0a0a0a; padding:16px 40px; border-radius:8px; font-weight:700; font-size:1rem; text-decoration:none; transition:opacity 0.15s; }
+.cta-btn:hover { opacity:0.85; }
+.faq-item { border:1px solid var(--border); border-radius:8px; margin-bottom:12px; overflow:hidden; }
+.faq-q { padding:16px 20px; font-weight:700; cursor:pointer; background:var(--card); display:flex; justify-content:space-between; align-items:center; font-size:0.95rem; }
+.faq-a { padding:16px 20px; background:#f7f5f0; font-size:0.9rem; color:#444; line-height:1.7; border-top:1px solid var(--border); }
+.stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:24px 0; }
+.stat-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:20px; text-align:center; }
+.stat-num { font-size:1.8rem; font-weight:900; color:var(--accent); display:block; }
+.stat-label { font-size:0.75rem; color:var(--muted); margin-top:4px; }
+.article-footer { border-top:1px solid var(--border); padding:32px 0 0; margin-top:48px; }
+.related-title { font-weight:700; margin-bottom:16px; }
+.related-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.related-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:16px; text-decoration:none; color:var(--ink); transition:border-color 0.15s; }
+.related-card:hover { border-color:var(--accent); }
+.related-card-title { font-size:0.9rem; font-weight:700; margin-bottom:4px; }
+.related-card-sub { font-size:0.78rem; color:var(--muted); }
+@media(max-width:600px) { .stat-grid{grid-template-columns:1fr} .related-grid{grid-template-columns:1fr} .cta-box{padding:28px 20px} }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a href="/" class="logo">AIビジネス診断</a>
+  <button class="header-cta" onclick="location.href='/'">無料で診断する</button>
+</header>
+
+<div class="hero-article">
+  <div class="eyebrow">起業 × AI診断</div>
+  <h1>起業アイデアの診断方法｜<br>AIが5秒で評価してくれる無料ツール</h1>
+  <p class="lead">あなたのビジネスアイデア、本当に勝算がありますか？AIが客観的に診断します。</p>
+</div>
+
+<div class="container">
+  <div class="toc">
+    <div class="toc-title">📋 この記事の内容</div>
+    <ol>
+      <li><a href="#what">起業アイデアの診断とは？</a></li>
+      <li><a href="#why">なぜAI診断が有効なのか</a></li>
+      <li><a href="#how">AI診断の使い方・3ステップ</a></li>
+      <li><a href="#point">診断結果の見方・活かし方</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+    </ol>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card"><span class="stat-num">5秒</span><div class="stat-label">診断にかかる時間</div></div>
+    <div class="stat-card"><span class="stat-num">無料</span><div class="stat-label">基本診断の料金</div></div>
+    <div class="stat-card"><span class="stat-num">100点</span><div class="stat-label">スコア満点</div></div>
+  </div>
+
+  <h2 id="what">起業アイデアの診断とは？</h2>
+  <p>起業を考えているとき、最も難しいのが「自分のアイデアに勝算があるかどうか」を客観的に判断することです。友人や家族に相談しても、励ましの言葉しかもらえないことが多く、本当の意味での第三者視点が得られません。</p>
+  <p>そこで注目されているのが、AIを使ったビジネスアイデアの診断です。感情に左右されず、データと論理で評価してくれるAIは、起業前の検証ツールとして急速に普及しています。</p>
+
+  <div class="highlight-box">
+    <p><strong>ポイント：</strong>起業の失敗原因の第1位は「市場調査不足」です（中小企業庁調べ）。AIによる事前診断は、この失敗リスクを大幅に下げてくれます。</p>
+  </div>
+
+  <h2 id="why">なぜAI診断が有効なのか</h2>
+  <p>従来のビジネス診断は、コンサルタントへの依頼で数十万円、専門書を読み込んでも数週間かかっていました。AIの登場でこのコストが劇的に下がりました。</p>
+
+  <h3>AI診断の3つのメリット</h3>
+  <ul class="check-list">
+    <li>感情や忖度なしに客観的なスコアを出してくれる</li>
+    <li>強み・弱点・改善策まで具体的に提示してくれる</li>
+    <li>24時間365日、何度でも無料で試せる</li>
+  </ul>
+
+  <h3>専門家との比較</h3>
+  <p>もちろん、最終的な事業計画は専門家の助言が必要です。ただし、AI診断を「最初のふるいがけ」として使うことで、本当に可能性のあるアイデアだけを専門家に相談するという効率的な流れが作れます。</p>
+
+  <h2 id="how">AI診断の使い方・3ステップ</h2>
+  <p>当サイトのAIビジネス診断は、以下の3ステップで完了します。</p>
+
+  <h3>Step 1：アイデアを入力する</h3>
+  <p>「どんなビジネスをやりたいか」を自由に入力します。箇条書きでも、文章でも構いません。思っていることをそのまま書いてください。</p>
+
+  <h3>Step 2：4つの質問に答える</h3>
+  <p>現在のステージ、使える資金、自分の強み、収益化のタイムラインについて選択肢から選びます。所要時間は約30秒です。</p>
+
+  <h3>Step 3：AIが診断結果を生成</h3>
+  <p>0〜100点のスコア、強み4つ、改善ポイントがリアルタイムで表示されます。さらに詳細な戦略レポートはプレミアムで取得できます。</p>
+
+  <div class="cta-box">
+    <h3>🔍 今すぐ無料で診断する</h3>
+    <p>あなたのビジネスアイデアは何点？<br>AIが客観的に評価します。所要時間30秒。</p>
+    <a href="/" class="cta-btn">無料でAI診断を始める →</a>
+  </div>
+
+  <h2 id="point">診断結果の見方・活かし方</h2>
+  <h3>スコアの目安</h3>
+  <ul class="check-list">
+    <li><strong>80点以上：</strong>すぐに行動を開始すべき優良アイデア</li>
+    <li><strong>60〜79点：</strong>改善点を修正すれば十分勝算がある</li>
+    <li><strong>40〜59点：</strong>ビジネスモデルの根本的な見直しが必要</li>
+    <li><strong>40点未満：</strong>アイデアを大幅に変更することを検討</li>
+  </ul>
+
+  <h3>改善ポイントの活かし方</h3>
+  <p>診断で指摘された弱点は、事業計画書に「リスクと対策」として記載することができます。投資家や金融機関へのプレゼンで、「このリスクは認識していて、こう対策する」と言えることは大きな強みになります。</p>
+
+  <h2 id="faq">よくある質問</h2>
+  <div class="faq-item">
+    <div class="faq-q">診断結果は何に基づいていますか？</div>
+    <div class="faq-a">世界最高水準のAIモデル（Anthropic Claude）が、あなたの入力内容をもとに市場性・実現可能性・収益性を総合評価しています。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">入力した情報は第三者に共有されますか？</div>
+    <div class="faq-a">入力情報は診断目的のみに使用し、第三者への提供は一切行いません。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">何度でも診断できますか？</div>
+    <div class="faq-a">基本診断は無料で何度でもご利用いただけます。アイデアを改良するたびに再診断することをお勧めします。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">プレミアムレポートとの違いは？</div>
+    <div class="faq-a">無料版は強み・弱点の概要まで。プレミアム（¥480）では3ヶ月ロードマップ・競合分析・価格戦略・リスク対策まで詳細に提供します。</div>
+  </div>
+
+  <div class="article-footer">
+    <div class="related-title">関連ツール</div>
+    <div class="related-grid">
+      <a href="https://ai-resume-chi-amber.vercel.app" class="related-card">
+        <div class="related-card-title">AI職務経歴書ライター</div>
+        <div class="related-card-sub">転職・起業後の書類作成をAIが10分でサポート</div>
+      </a>
+      <a href="https://ai-ninso.vercel.app" class="related-card">
+        <div class="related-card-title">AI人相診断</div>
+        <div class="related-card-sub">写真1枚で才能・性格・運勢を診断</div>
+      </a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
