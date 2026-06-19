@@ -249,6 +249,12 @@ body{background:var(--black);color:var(--white);font-family:'Noto Sans JP',sans-
     </div>
   </div>
 
+  <div class="biz-cta" id="biz-cta" style="display:none;background:var(--card,#161a23);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:22px;margin-bottom:14px;text-align:center">
+    <div style="font-size:1.0rem;font-weight:700;margin-bottom:8px">そのアイデア、次の一歩を踏み出しませんか？</div>
+    <p style="font-size:0.85rem;color:var(--muted);line-height:1.7;margin-bottom:16px">開業準備・会社設立・資金調達など、アイデアを形にするためのサポートサービスを紹介します。</p>
+    <a id="biz-cta-btn" href="#" target="_blank" rel="noopener sponsored" style="display:inline-block;background:var(--accent);color:#fff;padding:13px 30px;border-radius:8px;font-weight:700;text-decoration:none;font-size:0.88rem">開業・資金調達サポートを見る →</a>
+  </div>
+
   <div class="action-row">
     <button class="share-btn" onclick="shareX()">𝕏 結果をシェアする</button>
     <button class="share-btn" onclick="shareLine()">💬 LINEで共有</button>
@@ -258,6 +264,15 @@ body{background:var(--black);color:var(--white);font-family:'Noto Sans JP',sans-
 
 <script>
 const STRIPE_URL = 'https://buy.stripe.com/5kQ8wR5OTd29bGX3no18c00';
+
+// ★★★ 起業・資金調達サポートCTA設定欄 ★★★
+// freee会社設立/弥生開業支援/クラウドファンディング等のASP提携後にURLを設定してください
+const BIZ_CTA_URL = '';
+(function initBizCta(){
+  if(!BIZ_CTA_URL) return;
+  document.getElementById('biz-cta-btn').href = BIZ_CTA_URL;
+  document.getElementById('biz-cta').style.display = 'block';
+})();
 
 const questions = [
   {id:'idea', num:'01/05', text:'どんなビジネスをやりたいですか？', type:'free',
